@@ -1,6 +1,6 @@
 <application>
   <component name="GithubSettings">
-    <option name="HOST" value="" />
-    <option name="VALID_GIT_AUTH" value="false" />
+    <option name="LOGIN" value="sawfn-wa16@student.tarc.edu.my" />
+    <option name="AUTH_TYPE" value="BASIC" />
   </component>
 </application>
