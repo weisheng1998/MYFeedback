@@ -1,0 +1,7 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="nav_header" type="XML" />
+    </extensionMap>
+  </component>
+</application>
