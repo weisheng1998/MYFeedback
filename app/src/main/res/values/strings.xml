@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name" translatable="false">MYFeedback</string>
+    <string name="tabLabel1">NEWS</string>
+    <string name="tabLabel2">COMPLAINT</string>
+    <string name="tabLabel3">ACHIEVEMENT</string>
+    <string name="login">Login</string>
+    <string name="profile">Profile</string>
+    <string name="setting">Settings</string>
+    <string name="aboutus">About Us</string>
+    <string name="exit">Exit</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
+    <string name="changeLanguage">Change Language</string>
+    <string name="exitPrompt">Are you sure you want to exit?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+</resources>

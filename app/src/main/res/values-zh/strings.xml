@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aboutus">关于</string>
+    <string name="exit">退出</string>
+    <string name="login">登入</string>
+    <string name="profile">个人资料</string>
+    <string name="setting">设定</string>
+    <string name="tabLabel1">新闻</string>
+    <string name="tabLabel2">投诉</string>
+    <string name="tabLabel3">成就</string>
+    <string name="changeLanguage">更换语言</string>
+    <string name="exitPrompt">确定退出？</string>
+    <string name="Yes">確定</string>
+    <string name="No">取消</string>
+</resources>
