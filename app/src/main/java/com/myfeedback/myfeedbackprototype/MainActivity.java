@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,14 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
-
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView text1;
+    //home fragment variables fragmentN => N equals 'N'ews and vice versa
+    final Fragment fragmentN = new NewsFragment();
+    final Fragment fragmentC = new ComplaintFragment();
+    final Fragment fragmentA = new AchievementFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragmentN;
+
     private DrawerLayout mDrawerLayout;
 
     // these two variables will be used by SharedPreferences
@@ -35,22 +41,30 @@ public class MainActivity extends AppCompatActivity {
         loadLanguage();
         setContentView(R.layout.activity_main);
 
+        //hide fragment
+        BottomNavigationView Bnavigation = findViewById(R.id.bottom_navigation);
+        Bnavigation.setOnNavigationItemSelectedListener(mBottomNavigation);
+
+        fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentA, "3").hide(fragmentA).commit();
+        fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentC, "2").hide(fragmentC).commit();
+        fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentN, "1").commit();
+
         //add toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //convert to actionbar
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
+        //Navigation Drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
@@ -70,35 +84,34 @@ public class MainActivity extends AppCompatActivity {
                                 onBackPressed();
                                 break;
                         }
-
-                        return true;
-                    }
-                });
-
-        //testing textview while navigating
-        text1 = findViewById(R.id.text1);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.news:
-                                text1.setText(R.string.tabLabel1);
-                                break;
-
-                            case R.id.complaint:
-                                text1.setText(R.string.tabLabel2);
-                                break;
-
-                            case R.id.achievement:
-                                text1.setText(R.string.tabLabel3);
-                                break;
-                        }
                         return true;
                     }
                 });
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigation
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.news:
+                    fm.beginTransaction().hide(active).show(fragmentN).commit();
+                    active = fragmentN;
+                    return true;
+
+                case R.id.complaint:
+                    fm.beginTransaction().hide(active).show(fragmentC).commit();
+                    active = fragmentC;
+                    return true;
+
+                case R.id.achievement:
+                    fm.beginTransaction().hide(active).show(fragmentA).commit();
+                    active = fragmentA;
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

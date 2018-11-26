@@ -13,4 +13,10 @@
     <string name="exitPrompt">Are you sure you want to exit?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="AchievementFragment" translatable="false">This is a achievement page</string>
+    <string name="ComplaintFragment" translatable="false">This is a complaint page</string>
+    <string name="NewsFragment" translatable="false">This is a news page</string>
 </resources>
