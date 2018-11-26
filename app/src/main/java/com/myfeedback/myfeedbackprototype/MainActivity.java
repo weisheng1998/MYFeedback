@@ -1,8 +1,10 @@
 package com.myfeedback.myfeedbackprototype;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -17,6 +19,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
+import android.view.Window;
+import android.view.WindowManager;
+
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         //initialisation
         super.onCreate(savedInstanceState);
         loadLanguage();
@@ -184,7 +190,9 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
         // recreate activity after saving to load the new language, this is the same
         // as refreshing activity to load new language
-        recreate();
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     private void loadLanguage() {
