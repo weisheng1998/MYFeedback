@@ -19,4 +19,6 @@
     <string name="AchievementFragment" translatable="false">This is a achievement page</string>
     <string name="ComplaintFragment" translatable="false">This is a complaint page</string>
     <string name="NewsFragment" translatable="false">This is a news page</string>
+    <string name="aboutUs3" translatable="false">Credits</string>
+    <string name="aboutUs4" translatable="false">Neoh Wei Sheng \n Tan Yie Hong \n Saw Fei Nie\n See Thou Zhendong</string>
 </resources>

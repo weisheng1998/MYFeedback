@@ -12,4 +12,5 @@
     <string name="exitPrompt">" வெளியேற?"</string>
     <string name="Yes">" ஆம்"</string>
     <string name="No">" இல்லை"</string>
+    <string name="aboutUs">About Us</string>
 </resources>

@@ -44,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
 
         //initialisation
         super.onCreate(savedInstanceState);
+
+        //make status bar translucent
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(0x00000000);  // transparent
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            window.addFlags(flags);
+        }
+
         loadLanguage();
         setContentView(R.layout.activity_main);
 
@@ -75,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
 
                         // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         switch (menuItem.getItemId()) {
                             case R.id.login:
                                 break;
@@ -84,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
 
                             case R.id.aboutus:
+                                launchAboutUs();
                                 break;
 
                             case R.id.exit:
@@ -93,6 +105,11 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    private void launchAboutUs(){
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigation

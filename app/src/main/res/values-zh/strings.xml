@@ -12,4 +12,5 @@
     <string name="exitPrompt">确定退出？</string>
     <string name="Yes">確定</string>
     <string name="No">取消</string>
+    <string name="aboutUs">About Us</string>
 </resources>
