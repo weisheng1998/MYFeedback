@@ -20,6 +20,6 @@
     <string name="ComplaintFragment" translatable="false">This is a complaint page</string>
     <string name="NewsFragment" translatable="false">This is a news page</string>
     <string name="about1" translatable="false">My Feedback App\nv0.1.0 alpha</string>
-    <string name="about2" translatable="false">Proudly developed by:</string>
+    <string name="about2">Proudly developed by:</string>
     <string name="about3" translatable="false">Neoh Wei Sheng \n Tan Yie Hong \n Saw Fei Nie\n See Thou Zhendong\n Lok Yee Von</string>
 </resources>

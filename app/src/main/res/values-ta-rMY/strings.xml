@@ -12,4 +12,5 @@
     <string name="exitPrompt">Press again to exit</string>
     <string name="Yes">" ஆம்"</string>
     <string name="No">" இல்லை"</string>
+    <string name="about2">Proudly developed by:</string>
 </resources>
