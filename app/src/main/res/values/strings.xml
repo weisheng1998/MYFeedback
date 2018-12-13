@@ -10,7 +10,7 @@
     <string name="exit">Exit</string>
     <string name="title_activity_settings" translatable="false">SettingsActivity</string>
     <string name="changeLanguage">Change Language</string>
-    <string name="exitPrompt">Are you sure you want to exit?</string>
+    <string name="exitPrompt">Press again to exit</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
 
@@ -19,6 +19,7 @@
     <string name="AchievementFragment" translatable="false">This is a achievement page</string>
     <string name="ComplaintFragment" translatable="false">This is a complaint page</string>
     <string name="NewsFragment" translatable="false">This is a news page</string>
-    <string name="aboutUs3" translatable="false">Credits</string>
-    <string name="aboutUs4" translatable="false">Neoh Wei Sheng \n Tan Yie Hong \n Saw Fei Nie\n See Thou Zhendong</string>
+    <string name="about1" translatable="false">My Feedback App\nv0.1.0 alpha</string>
+    <string name="about2" translatable="false">Proudly developed by:</string>
+    <string name="about3" translatable="false">Neoh Wei Sheng \n Tan Yie Hong \n Saw Fei Nie\n See Thou Zhendong\n Lok Yee Von</string>
 </resources>
