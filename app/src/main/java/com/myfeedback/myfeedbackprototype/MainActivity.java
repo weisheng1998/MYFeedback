@@ -102,10 +102,6 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.aboutus:
                                 launchAboutUs();
                                 break;
-
-                            case R.id.exit:
-                                onBackPressed();
-                                break;
                         }
                         return true;
                     }
