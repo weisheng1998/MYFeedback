@@ -1,6 +1,7 @@
 package com.myfeedback.myfeedbackprototype;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -25,6 +26,8 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
     LoginBackground (Context ctx) {
         context = ctx;
     }
+    ProgressDialog loadingDialog;
+
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
@@ -69,17 +72,19 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+        alertDialog.setTitle("Login Failed");
+        loadingDialog = ProgressDialog.show(context, "", "Logging In ...", true);;
 
     }
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
+        loadingDialog.cancel();
         if(result.contentEquals("sucess")){
             context.startActivity(new Intent(context, MainActivity.class));
         }
         else{
+            alertDialog.setMessage(result);
             alertDialog.show();
         }
 
