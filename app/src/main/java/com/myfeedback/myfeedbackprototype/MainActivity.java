@@ -24,7 +24,6 @@ import android.view.View;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView Bnavigation = findViewById(R.id.bottom_navigation);
         Bnavigation.setOnNavigationItemSelectedListener(mBottomNavigation);
 
+
         fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentA, "3").hide(fragmentA).commit();
         fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentC, "2").hide(fragmentC).commit();
         fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentN, "1").commit();
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        toolbar.setTitleTextAppearance(this, R.style.GoogleSansTextAppearance);
 
         //Navigation Drawer
         getWindow().setFlags(
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         // Add code here to update the UI based on the item selected
                         switch (menuItem.getItemId()) {
                             case R.id.login:
+                                launchLogin();
                                 break;
 
                             case R.id.profile:
@@ -110,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchAboutUs(){
         Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
@@ -231,4 +239,6 @@ public class MainActivity extends AppCompatActivity {
         String langCode = preferences.getString(KEY_LANG, "en");
         return langCode;
     }
+
+
 }
