@@ -70,13 +70,20 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle("Login Status");
-        context.startActivity(new Intent(context, MainActivity.class));
+
     }
 
     @Override
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
-        alertDialog.show();
+        if(result.contentEquals("sucess")){
+            context.startActivity(new Intent(context, MainActivity.class));
+        }
+        else{
+            alertDialog.show();
+        }
+
+
     }
 
     @Override
