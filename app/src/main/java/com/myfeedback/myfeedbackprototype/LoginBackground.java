@@ -27,11 +27,15 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
         context = ctx;
     }
     ProgressDialog loadingDialog;
-
+    String type_g = "";
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
         String login_url = "https://developer.tprocenter.net/android/login.php";
+        String register_url = "https://developer.tprocenter.net/android/register.php";
+
+        type_g = type;
+
         if(type.equals("login")) {
             try {
                 String user_name = params[1];
@@ -65,36 +69,85 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if(type.equals("register")){
+            try {
+                String fname = params[1];
+                String lname = params[2];
+                String age = params[3];
+                String email = params[4];
+                String IC = params[5];
+                String address = params[6];
+                String password = params[7];
+                URL url = new URL(register_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("f_name","UTF-8")+"="+URLEncoder.encode(fname,"UTF-8")+"&"
+                        + URLEncoder.encode("l_name","UTF-8")+"="+URLEncoder.encode(lname,"UTF-8")+"&"
+                        + URLEncoder.encode("age","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
+                        + URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"
+                        + URLEncoder.encode("ic","UTF-8")+"="+URLEncoder.encode(IC,"UTF-8")+"&"
+                        + URLEncoder.encode("address","UTF-8")+"="+URLEncoder.encode(address,"UTF-8")+"&"
+                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Failed");
-        loadingDialog = ProgressDialog.show(context, "", "Logging In ...", true);;
-
+        if(type_g.equals("login")){
+            alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("Login Failed");
+            loadingDialog = ProgressDialog.show(context, "", "Logging In ...", true);
+        }else{
+            alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("Register Failed");
+            loadingDialog = ProgressDialog.show(context, "", "Validating registration details...", true);
+        }
     }
 
     @Override
     protected void onPostExecute(String result) {
-        loadingDialog.cancel();
-        if(result.contentEquals("sucess")){
-            context.startActivity(new Intent(context, MainActivity.class));
+                loadingDialog.cancel();
+                if(result.contentEquals("login_success")){
+                    context.startActivity(new Intent(context, MainActivity.class));
+                }
+                else if(result.contentEquals("register_success")){
+                    alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("Registration Success.");
+                    context.startActivity(new Intent(context, LoginActivity.class));
+                }
+                else{
+                    alertDialog.setMessage(result);
+                    alertDialog.show();
         }
-        else{
-            alertDialog.setMessage(result);
-            alertDialog.show();
-        }
-
-
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
-
-
 }

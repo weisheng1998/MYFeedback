@@ -1,5 +1,6 @@
 package com.myfeedback.myfeedbackprototype;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,5 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         String type = "login";
         LoginBackground loginBackground = new LoginBackground(this);
         loginBackground.execute(type, email, password);
+    }
+
+    public void BtnRegister(View view){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }

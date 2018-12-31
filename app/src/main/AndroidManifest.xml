@@ -26,7 +26,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".NewComplaint"></activity>
+        <activity android:name=".NewComplaint" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
