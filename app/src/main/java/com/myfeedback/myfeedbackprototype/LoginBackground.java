@@ -1,11 +1,9 @@
 package com.myfeedback.myfeedbackprototype;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 
 import java.io.BufferedReader;
@@ -21,13 +19,14 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class LoginBackground extends AsyncTask<String,Void,String> {
-    Context context;
+    public String type_g = "";
     AlertDialog alertDialog;
     LoginBackground (Context ctx) {
         context = ctx;
     }
     ProgressDialog loadingDialog;
-    String type_g = "";
+    private Context context;
+
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
@@ -56,7 +55,7 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
                 String result="";
-                String line="";
+                String line;
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
                 }
@@ -99,7 +98,7 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
                 String result="";
-                String line="";
+                String line;
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
                 }
@@ -118,30 +117,24 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        if(type_g.equals("login")){
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("Login Failed");
-            loadingDialog = ProgressDialog.show(context, "", "Logging In ...", true);
-        }else{
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("Register Failed");
-            loadingDialog = ProgressDialog.show(context, "", "Validating registration details...", true);
-        }
+        loadingDialog = ProgressDialog.show(context, "", "Loading...", true);
     }
 
     @Override
     protected void onPostExecute(String result) {
                 loadingDialog.cancel();
-                if(result.contentEquals("login_success")){
+        if (result.contentEquals("login_sucess")) {
+            loadingDialog = ProgressDialog.show(context, "", "Login Success. Redirecting you back...", true);
                     context.startActivity(new Intent(context, MainActivity.class));
                 }
                 else if(result.contentEquals("register_success")){
-                    alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("Registration Success.");
+            loadingDialog = ProgressDialog.show(context, "", "Registration Success.", true);
                     context.startActivity(new Intent(context, LoginActivity.class));
                 }
                 else{
+            alertDialog = new AlertDialog.Builder(context).create();
                     alertDialog.setMessage(result);
+            alertDialog.setTitle("Login failed.");
                     alertDialog.show();
         }
     }
