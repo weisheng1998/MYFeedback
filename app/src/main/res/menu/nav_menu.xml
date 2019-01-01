@@ -6,6 +6,12 @@
         android:icon="@drawable/ic_login"
         android:title="@string/login"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/register"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_add_black"
+        android:title="@string/register"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile"

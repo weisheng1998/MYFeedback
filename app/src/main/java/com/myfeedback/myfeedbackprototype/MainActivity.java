@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -18,10 +19,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
                                 launchLogin();
                                 break;
 
+                            case R.id.register:
+                                launchRegister();
+                                break;
+
                             case R.id.profile:
                                 break;
 
@@ -113,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchAboutUs(){
         Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchRegister() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
@@ -239,6 +248,4 @@ public class MainActivity extends AppCompatActivity {
         String langCode = preferences.getString(KEY_LANG, "en");
         return langCode;
     }
-
-
 }
