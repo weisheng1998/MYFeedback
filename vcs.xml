@@ -14,6 +14,10 @@
           <option name="url" value="https://github.com/googlecodelabs/android-navigation" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/weisheng1998/MYFeedback.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\Wei Sheng\AndroidStudioProjects" />
