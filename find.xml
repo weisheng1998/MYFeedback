@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File '...\app\src\main\res\layout\fragment_complaint.xml [app]'" />
-    <option name="defaultScopeName" value="File '...\app\src\main\res\layout\fragment_complaint.xml [app]'" />
-    <option name="SEARCH_SCOPE" value="File '...\app\src\main\res\layout\fragment_complaint.xml [app]'" />
+    <option name="customScope" value="Project 'MYFeedbackPROTOTYPE'" />
+    <option name="defaultScopeName" value="Project 'MYFeedbackPROTOTYPE'" />
+    <option name="SEARCH_SCOPE" value="Project 'MYFeedbackPROTOTYPE'" />
   </component>
 </application>
