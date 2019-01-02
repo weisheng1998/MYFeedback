@@ -30,5 +30,14 @@
     <string name="password" translatable="false">Password</string>
     <string name="age" translatable="false">Age</string>
     <string name="ic" translatable="false">IC</string>
+
+    <!-- New Complaint Requirement -->
+    <string-array name="category">
+        <item>Complaint</item>
+        <item>Suggestion</item>
+        <item>Feedback</item>
+    </string-array>
+
+
     <string name="logout" translatable="false">Logout</string>
 </resources>
