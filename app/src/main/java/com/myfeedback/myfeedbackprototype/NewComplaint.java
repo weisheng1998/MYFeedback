@@ -1,15 +1,11 @@
 package com.myfeedback.myfeedbackprototype;
 
 import android.os.Bundle;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.AdapterView;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NewComplaint extends AppCompatActivity {
 
@@ -35,7 +31,7 @@ public class NewComplaint extends AppCompatActivity {
             }
         });
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
