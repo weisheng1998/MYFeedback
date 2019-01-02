@@ -179,8 +179,8 @@ public class RegisterActivity extends AppCompatActivity {
             str_Address = String.valueOf(address.getText()).trim();
             type = "register";
 
-            LoginBackground loginBackground = new LoginBackground(this);
-            loginBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass);
+            RegisterBackground registerBackground = new RegisterBackground(this);
+            registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass);
         }
     }
 

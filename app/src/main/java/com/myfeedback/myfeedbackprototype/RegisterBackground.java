@@ -19,14 +19,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LoginBackground extends AsyncTask<String,Void,String> {
+public class RegisterBackground extends AsyncTask<String,Void,String> {
     public String type_g = "";
     AlertDialog alertDialog;
     public String p_username;
     ProgressDialog loadingDialog;
     public Context context;
 
-    public LoginBackground(Context ctx) {
+    public RegisterBackground(Context ctx) {
         this.context = ctx;
     }
 
@@ -124,34 +124,36 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        loadingDialog = ProgressDialog.show(context, "Please Wait", "Logging In ...", true);
+        loadingDialog = ProgressDialog.show(context, "Please Wait", "Registering ...", true);
     }
 
     @Override
     protected void onPostExecute(String result) {
         loadingDialog.dismiss();
-        if (result.contentEquals("login_success")) {
-            SharedPrefManager.getInstance(context.getApplicationContext()).userLogin(p_username);
-            ((LoginActivity)context).finish();
-           // ((MainActivity)context).finish();
-            context.startActivity(new Intent(context, MainActivity.class));
+        if (result.contentEquals("register_success")) {
 
-            // loadingDialog = ProgressDialog.show(context, "", "Login success. Redirecting you back...", true);
-            // loadingDialog.dismiss();
-        }
-        else {
+            //loadingDialog = ProgressDialog.show(context, "", "Registration success.", true);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Login Failure")
-                    .setMessage(result)
+            builder.setTitle("Registration Success")
+                    .setMessage("Thank You for been part of family.")
                     .setCancelable(false)
                     .setNegativeButton("Close",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
+                            ((RegisterActivity)context).finish();
+                            context.startActivity(new Intent(context, LoginActivity.class));
                         }
                     });
             AlertDialog alert = builder.create();
             alert.show();
 
+
+        } else {
+            alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setMessage(result);
+            alertDialog.setTitle("Login failed.");
+            alertDialog.show();
         }
     }
 

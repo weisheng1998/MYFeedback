@@ -110,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
             String type = "login";
             LoginBackground loginBackground = new LoginBackground(this);
             loginBackground.execute(type, email, password);
-            finishAndRemoveTask();
 
         }
     }
