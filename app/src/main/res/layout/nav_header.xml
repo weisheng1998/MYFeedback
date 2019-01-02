@@ -10,6 +10,7 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
+    android:paddingTop="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
@@ -23,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:text="@string/app_name"
         android:textAppearance="@style/GoogleSansTextAppearance"
         android:textColor="@android:color/white"
         android:textSize="18sp" />

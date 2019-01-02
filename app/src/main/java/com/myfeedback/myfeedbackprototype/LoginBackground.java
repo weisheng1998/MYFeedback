@@ -21,17 +21,21 @@ import java.net.URLEncoder;
 public class LoginBackground extends AsyncTask<String,Void,String> {
     public String type_g = "";
     AlertDialog alertDialog;
-    LoginBackground (Context ctx) {
-        context = ctx;
-    }
+    public String p_username;
     ProgressDialog loadingDialog;
     private Context context;
+
+    public LoginBackground(Context ctx) {
+        this.context = ctx;
+    }
 
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
         String login_url = "https://developer.tprocenter.net/android/login.php";
         String register_url = "https://developer.tprocenter.net/android/register.php";
+
+        p_username = params[1];
 
         type_g = type;
 
@@ -111,6 +115,8 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else { //logout
+
         }
         return null;
     }
@@ -122,20 +128,22 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-                loadingDialog.cancel();
-        if (result.contentEquals("login_sucess")) {
-            loadingDialog = ProgressDialog.show(context, "", "Login Success. Redirecting you back...", true);
-                    context.startActivity(new Intent(context, MainActivity.class));
-                }
-                else if(result.contentEquals("register_success")){
-            loadingDialog = ProgressDialog.show(context, "", "Registration Success.", true);
-                    context.startActivity(new Intent(context, LoginActivity.class));
-                }
-                else{
+        loadingDialog.cancel();
+        if (result.contentEquals("login_success")) {
+            loadingDialog = ProgressDialog.show(context, "", "Login success. Redirecting you back...", true);
+
+            SharedPrefManager.getInstance(context.getApplicationContext())
+                    .userLogin(p_username);
+
+            context.startActivity(new Intent(context, MainActivity.class));
+        } else if (result.contentEquals("register_success")) {
+            loadingDialog = ProgressDialog.show(context, "", "Registration success.", true);
+            context.startActivity(new Intent(context, LoginActivity.class));
+        } else {
             alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setMessage(result);
+            alertDialog.setMessage(result);
             alertDialog.setTitle("Login failed.");
-                    alertDialog.show();
+            alertDialog.show();
         }
     }
 

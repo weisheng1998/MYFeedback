@@ -1,5 +1,6 @@
 package com.myfeedback.myfeedbackprototype;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,10 +21,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -37,10 +40,12 @@ public class MainActivity extends AppCompatActivity {
     Fragment active = fragmentN;
 
     private DrawerLayout mDrawerLayout;
+    TextView tv;
 
     // these two variables will be used by SharedPreferences
     private static final String FILE_NAME = "file_lang"; // preference file name
     private static final String KEY_LANG = "key_lang"; // preference key
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView Bnavigation = findViewById(R.id.bottom_navigation);
         Bnavigation.setOnNavigationItemSelectedListener(mBottomNavigation);
 
-
         fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentA, "3").hide(fragmentA).commit();
         fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentC, "2").hide(fragmentC).commit();
         fm.beginTransaction().add(R.id.homeFragmentPlaceholder, fragmentN, "1").commit();
@@ -84,8 +88,26 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        //check weather user has logged in
+        View headerView = navigationView.getHeaderView(0);
+        tv = headerView.findViewById(R.id.nav_header_textView);
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            tv.setText(SharedPrefManager.getInstance(this).getKeyUserEmail());
+
+            //press profile picture to navigate to profile page
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    launchProfile();
+                }
+            });
+        } else {
+            tv.setText("MYFeedback");
+        }
+
+        //link to other activity from the navigation drawer
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -103,7 +125,15 @@ public class MainActivity extends AppCompatActivity {
                                 launchRegister();
                                 break;
 
+                            case R.id.logout:
+                                SharedPrefManager.getInstance(MainActivity.this).logout();
+                                finishAndRemoveTask();
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                break;
+
                             case R.id.profile:
+                                launchProfile();
                                 break;
 
                             case R.id.aboutus:
@@ -115,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void launchAboutUs(){
+    private void launchAboutUs() {
         Intent intent = new Intent(this, AboutUsActivity.class);
         startActivity(intent);
     }
@@ -125,9 +155,33 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void launchLogin(){
+    private void launchLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    private void launchProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    //this code will run before the navigation drawer is initialised, so that we can programmatically configure the
+    //visibility of the menu
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu login_menu = navigationView.getMenu();
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            login_menu.findItem(R.id.login).setVisible(false);
+            login_menu.findItem(R.id.register).setVisible(false);
+            login_menu.findItem(R.id.logout).setVisible(true);
+        } else {
+            login_menu.findItem(R.id.login).setVisible(true);
+            login_menu.findItem(R.id.register).setVisible(true);
+            login_menu.findItem(R.id.logout).setVisible(false);
+        }
+        return true;
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigation
@@ -172,7 +226,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            return;
         }
 
         constLayout = findViewById(R.id.mainConstLayout);
@@ -185,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
@@ -215,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    // create and show the alert dialog
+        // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
     }
