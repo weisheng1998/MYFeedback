@@ -7,12 +7,12 @@
     tools:context=".ComplaintFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/g"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/ComplaintFragment" />
+    <!--<TextView-->
+        <!--android:id="@+id/g"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center_vertical|center_horizontal"-->
+        <!--android:text="@string/ComplaintFragment" />-->
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,6 +34,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.985" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/complaint_list"
+            android:layout_width="384dp"
+            android:layout_height="571dp"
+            android:layout_marginTop="24dp"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
     </android.support.constraint.ConstraintLayout>
 

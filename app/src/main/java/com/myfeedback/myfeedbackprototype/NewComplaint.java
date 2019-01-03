@@ -31,6 +31,7 @@ public class NewComplaint extends AppCompatActivity {
             }
         });
 
+        // Spinner (Dropdown Bar)
         Spinner spinner = findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
@@ -38,7 +39,6 @@ public class NewComplaint extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-
 
 
     }
