@@ -43,4 +43,6 @@
     <string name="default_notification_channel_name" />
     <string name="default_notification_channel_id" />
     <string name="msg_token_fmt" />
+    <string name="title_activity_view_complaint">ViewComplaint</string>
+    <string name="title_activity_view_complain">View Complain</string>
 </resources>

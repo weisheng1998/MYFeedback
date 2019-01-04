@@ -53,9 +53,14 @@
             android:name=".MyInstanceIDListenerService"
             android:permission="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".ViewComplain"
+            android:label="@string/title_activity_view_complain"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
