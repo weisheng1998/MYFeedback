@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -21,7 +20,6 @@ public class NewComplaint extends AppCompatActivity {
     private int STORAGE_PERMISSION_CODE = 1;
     private int CAMERA_PERMISSION_CODE = 1;
     private int GPS_PERMISSION_CODE = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +65,6 @@ public class NewComplaint extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void requestStoragePermission() {
