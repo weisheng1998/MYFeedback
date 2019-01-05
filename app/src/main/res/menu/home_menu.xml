@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/news"
+        android:enabled="true"
+        android:icon="@drawable/ic_news"
+        android:title="@string/tabLabel1"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/complaint"
+        android:enabled="true"
+        android:icon="@drawable/ic_complaint"
+        android:title="@string/tabLabel2"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/achievement"
+        android:enabled="true"
+        android:icon="@drawable/ic_achievement"
+        android:title="@string/tabLabel3"
+        app:showAsAction="ifRoom" />
+</menu>

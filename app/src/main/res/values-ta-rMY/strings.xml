@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aboutus">" எங்களை பற்றி"</string>
+    <string name="tabLabel3">சாதனை</string>
+    <string name="tabLabel2">புகார்</string>
+    <string name="exit">விட்டுவிட</string>
+    <string name="login">உள் நுழை</string>
+    <string name="tabLabel1">" செய்தி"</string>
+    <string name="profile">" சுயவிவர"</string>
+    <string name="setting">" அமைப்புகளை"</string>
+    <string name="changeLanguage">மொழியை மாற்றவும்</string>
+    <string name="exitPrompt">Press again to exit</string>
+    <string name="Yes">" ஆம்"</string>
+    <string name="No">" இல்லை"</string>
+    <string name="about2">Proudly developed by:</string>
+    <string name="register">" உள் நுழை"</string>
+</resources>

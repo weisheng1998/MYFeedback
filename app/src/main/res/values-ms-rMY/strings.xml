@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aboutus">Tentang Kami</string>
+    <string name="exit">Keluar</string>
+    <string name="login">Log Masuk</string>
+    <string name="profile">Profil</string>
+    <string name="setting">Tetapan</string>
+    <string name="tabLabel1">Berita</string>
+    <string name="tabLabel2">Aduan</string>
+    <string name="tabLabel3">Pencapaian</string>
+    <string name="changeLanguage">Tukar bahasa</string>
+    <string name="exitPrompt">Tekan lagi untuk keluarkan</string>
+    <string name="Yes">Ya</string>
+    <string name="No">Tidak</string>
+    <string name="about2">Proudly developed by:</string>
+    <string name="register">Daftar</string>
+</resources>
