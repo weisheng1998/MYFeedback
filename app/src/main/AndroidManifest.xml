@@ -48,6 +48,8 @@
         <activity android:name=".NewComplaint" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".BrowserActivity" />
+        <activity android:name=".RSSFeedActivity" />
 
         <service
             android:name=".MyInstanceIDListenerService"
