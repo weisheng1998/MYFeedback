@@ -33,9 +33,14 @@
     <string name="msg_token_fmt" translatable="false" />
     <string name="title_activity_view_complaint" translatable="false">ViewComplaint</string>
     <string name="title_activity_view_complain" translatable="false">View Complain</string>
-    <string name="nonMemberLogin_achievement" translatable="false">Login or register to view your achievement history.</string>
+    <string name="nonMemberLogin_achievement" translatable="false">Login or register to view your achievement.</string>
     <string name="nonMemberLogin_complaint" translatable="false">Login or register to view your complaint history.</string>
     <string name="date_created" translatable="false">Date Created:</string>
+    <string name="category" translatable="false">Category :</string>
+    <string name="submit" translatable="false">Submit</string>
+    <string name="upload_image" translatable="false">Upload Image</string>
+    <string name="location_recorded" translatable="false">Your location will be recorded upon submission.</string>
+    <string name="complaints_made" translatable="false">Complaints made</string>
 
     <!-- New Complaint Requirement -->
     <string-array name="category">

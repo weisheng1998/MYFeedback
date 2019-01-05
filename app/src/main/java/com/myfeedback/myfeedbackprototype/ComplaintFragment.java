@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ComplaintFragment extends Fragment {
 
-    private static final String url = "http://192.168.1.104/phpQuery/complaintQuery.php";
+    private static final String url = "http://192.168.1.104/phpQuery/complaintQuery.php?user_email=";
 
     List<ComplaintList> complaintList;
     RecyclerView recyclerView;
@@ -56,11 +56,15 @@ public class ComplaintFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        String full_url = "";
         //check user is logged in
         if (SharedPrefManager.getInstance(getContext()).isLoggedIn()) {
             tv.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
             fab.setVisibility(View.VISIBLE);
+
+            String user_email = SharedPrefManager.getInstance(getContext()).getKeyUserEmail();
+            full_url = url.concat(user_email); //append uid to the url
         } else {
             tv.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.INVISIBLE);
@@ -70,27 +74,7 @@ public class ComplaintFragment extends Fragment {
         //initializing the productlist
         complaintList = new ArrayList<>();
 
-        //this method will fetch and parse json
-        //to display it in recyclerview
-        loadComplaints();
-
-        return RootView;
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // do your variables initialisations here
-        //getting the recyclerview from xml
-    }
-
-    public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        // initialise your views
-    }
-
-    private void loadComplaints() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, full_url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -128,5 +112,18 @@ public class ComplaintFragment extends Fragment {
 
         //adding our stringrequest to queue
         Volley.newRequestQueue(getContext()).add(stringRequest);
+
+        return RootView;
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // do your variables initialisations here
+        //getting the recyclerview from xml
+    }
+
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        // initialise your views
     }
 }

@@ -133,9 +133,8 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
         if (result.contentEquals("login_success")) {
             SharedPrefManager.getInstance(context.getApplicationContext()).userLogin(p_username);
             ((LoginActivity)context).finish();
-           // ((MainActivity)context).finish();
+            // ((MainActivity)context).finish();
             context.startActivity(new Intent(context, MainActivity.class));
-
             // loadingDialog = ProgressDialog.show(context, "", "Login success. Redirecting you back...", true);
             // loadingDialog.dismiss();
         }

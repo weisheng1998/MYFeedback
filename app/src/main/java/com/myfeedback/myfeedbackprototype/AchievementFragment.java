@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 public class AchievementFragment extends Fragment {
 
-    private static final String url = "http://192.168.1.104/phpQuery/achievementCount.php";
+    private static final String url = "http://192.168.1.104/phpQuery/achievementCount.php?user_email=";
 
     TextView tv_totalComplaintCount, tv_message, tv_notify;
     ConstraintLayout cl;
@@ -46,6 +46,9 @@ public class AchievementFragment extends Fragment {
             cl.setVisibility(View.VISIBLE);
             tv_notify.setVisibility(View.INVISIBLE);
 
+            String user_email = SharedPrefManager.getInstance(getContext()).getKeyUserEmail();
+            //append uid to the url
+            String full_url = url.concat(user_email);
             //get total count from database
             String result = null;
             tv_totalComplaintCount = view.findViewById(R.id.textViewTotalComplaintCount);
@@ -54,7 +57,7 @@ public class AchievementFragment extends Fragment {
 
             final String finalResult = result;
             JsonArrayRequest jsonRequest = new JsonArrayRequest
-                    (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                    (Request.Method.GET, full_url, null, new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
                             try {
