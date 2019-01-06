@@ -103,11 +103,11 @@ public class RegisterActivity extends AppCompatActivity {
                         valid = false;
                     } else if (!isEmailValid(email.getText().toString())) {
                         email.setError("Please enter a valid email address format.");
-                        valid = false;
-                    } else if (!checkEmailAvailability(email.getText().toString()).equalsIgnoreCase("pass")) {
-                        email.setError("This email address has been taken.");
-                        valid = false;
-                    }
+                        valid = false;}
+//                    } else if (!checkEmailAvailability(email.getText().toString()).equalsIgnoreCase("pass")) {
+//                        email.setError("This email address has been taken.");
+//                        valid = false;
+//                    }
                     else {
                         valid = true;
                     }
@@ -213,23 +213,29 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
 
-            if (checkDuplicateAccount().equalsIgnoreCase("pass")) {
-                RegisterBackground registerBackground = new RegisterBackground(this);
-                registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass, deviceID);
-            } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Multiple Account Creation Detected")
-                        .setMessage("We have detected you are trying to register multiple account. This is against our regulation.\n\n" +
-                                "If this is a mistake, please contact our support.")
-                        .setCancelable(false)
-                        .setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+            RegisterBackground registerBackground = new RegisterBackground(this);
+            registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass);
+
+
+//            registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass, deviceID);
+
+
+//            if (checkDuplicateAccount().equalsIgnoreCase("pass")) {
+//
+//            } else {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle("Multiple Account Creation Detected")
+//                        .setMessage("We have detected you are trying to register multiple account. This is against our regulation.\n\n" +
+//                                "If this is a mistake, please contact our support.")
+//                        .setCancelable(false)
+//                        .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//                AlertDialog alert = builder.create();
+//                alert.show();
+//            }
 
 
         }

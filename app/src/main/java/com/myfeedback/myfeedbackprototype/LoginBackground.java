@@ -34,7 +34,6 @@ public class LoginBackground extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... params) {
         String type = params[0];
         String login_url = "https://developer.tprocenter.net/android/login.php";
-        String register_url = "https://developer.tprocenter.net/android/register.php";
 
         p_username = params[1];
 

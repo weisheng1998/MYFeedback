@@ -127,9 +127,8 @@ public class LoginActivity extends AppCompatActivity {
 
             String type = "login";
 
-            if(checkDeviceID(email).equalsIgnoreCase("update required")) {
-                updateDeviceID(email);
-            };
+//            if(checkDeviceID(email).equalsIgnoreCase("update required")) {
+//                updateDeviceID(email);//           };
             LoginBackground loginBackground = new LoginBackground(this);
             loginBackground.execute(type, email, password);
 
