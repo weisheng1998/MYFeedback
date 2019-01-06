@@ -16,14 +16,21 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -36,8 +43,9 @@ public class ProfileActivity extends AppCompatActivity {
     final int CODE_GALLERY_REQUEST = 999;
     Button btnedit, btnUpload;
     ImageView imageView;
+    TextView tv_name, tv_age, tv_email, tv_address;
     Bitmap bitmap;
-    String urlUpload = "http://192.168.0.176/android/upload.php";
+
     ProgressDialog progressDialog;
 
     @Override
@@ -45,9 +53,34 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        String temp_url = "http://192.168.0.176/android/upload.php?uid=";
+        final String urlUpload = temp_url.concat(SharedPrefManager.getInstance(this).getKeyUserId());
+
+        //get user profile from SharedPrefManager
+        tv_name = findViewById(R.id.textViewName);
+        tv_name.setText(SharedPrefManager.getInstance(this).getKeyFName()+" "+SharedPrefManager.getInstance(this).getKeyLName());
+        tv_age = findViewById(R.id.textViewAge);
+        tv_age.setText(SharedPrefManager.getInstance(this).getKeyAge());
+        tv_email = findViewById(R.id.textViewEmail);
+        tv_email.setText(SharedPrefManager.getInstance(this).getKeyUserEmail());
+        tv_address = findViewById(R.id.textViewAddress);
+        tv_address.setText(SharedPrefManager.getInstance(this).getKeyAddress());
+        //image need to php to server to get image
+
         btnedit = findViewById(R.id.btnedit);
         btnUpload = findViewById(R.id.btnUpload);
         imageView = findViewById(R.id.imageViewProfile);
+
+        String db_img_path = "";
+
+        //check if profile image is in sharedPrefManager
+        if(SharedPrefManager.getInstance(this).getKeyImageInfo() != ""){
+            db_img_path = SharedPrefManager.getInstance(this).getKeyImageInfo();
+        }else{
+
+        }
+
+        Picasso.get().load("http://192.168.0.176/android"+db_img_path).into(imageView);
 
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,18 +99,19 @@ public class ProfileActivity extends AppCompatActivity {
                 progressDialog.setTitle("Uploading");
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
+
+                //send image to server using AndroidVolley StringRequest
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpload, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(getApplicationContext(), "Image uploaded successfully.", Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "error: " + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error uploading image: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
                     @Override
@@ -93,7 +127,6 @@ public class ProfileActivity extends AppCompatActivity {
                 requestQueue.add(stringRequest);
             }
         });
-
     }
 
     @Override
@@ -130,7 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
 
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);

@@ -87,10 +87,15 @@ public class SharedPrefManager {
 
     public String getKeyImageInfo(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_ADDRESS, "");
+        return sharedPreferences.getString(KEY_IMAGE_INFO, "");
     }
 
     public String getKeyUserId(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_ID, "");
+    }
+
+    public String getKeyAddress(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_ADDRESS, "");
     }
