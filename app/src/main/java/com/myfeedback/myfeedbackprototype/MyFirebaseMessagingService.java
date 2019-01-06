@@ -20,14 +20,6 @@ import java.util.Random;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG =  "FirebaseMessagingService";
-    SharedPreferences prefs = this.getSharedPreferences("com.myfeedback.myfeedbackprototype", Context.MODE_PRIVATE);
-
-    @Override
-    public void onNewToken(String mToken) {
-        super.onNewToken(mToken);
-        Log.e("TOKEN",mToken);
-        prefs.edit().putString("deviceID",mToken).apply();
-    }
 
     @SuppressLint("LongLogTag")
     @Override
