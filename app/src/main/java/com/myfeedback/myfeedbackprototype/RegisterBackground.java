@@ -107,10 +107,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
             alert.show();
         }
         else {
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setMessage("Sorry. Something went wrong on our side. Please try again later.");
-            alertDialog.setTitle("Register failed.");
-            alertDialog.show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Register failed.").setMessage("Sorry. Something went wrong on our side. Please try again later.");
+            builder.show();
         }
     }
 
