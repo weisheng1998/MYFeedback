@@ -119,12 +119,12 @@
         android:id="@+id/textViewRecordLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/location_recorded"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnUploadImage"
+        app:layout_constraintBottom_toTopOf="@+id/tv_latitude"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -139,5 +139,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+    <TextView
+        android:id="@+id/tv_longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Longtitude"
+        app:layout_constraintBottom_toTopOf="@+id/btnUploadImage"
+        app:layout_constraintStart_toEndOf="@+id/tv_latitude" />
+
+    <TextView
+        android:id="@+id/tv_latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Latitude"
+        app:layout_constraintBottom_toTopOf="@+id/btnUploadImage"
+        tools:layout_editor_absoluteX="129dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -27,11 +27,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
@@ -186,6 +188,14 @@ public class MainActivity extends AppCompatActivity {
             });
         } else {
             tv.setText(R.string.app_name);
+        }
+
+        ImageView imageView = headerView.findViewById(R.id.nav_header_imageView);
+
+        //check if profile image is in sharedPrefManager
+        if(SharedPrefManager.getInstance(this).getKeyImageInfo() != ""){
+            String db_img_path = SharedPrefManager.getInstance(this).getKeyImageInfo();
+            Picasso.get().load("http://192.168.0.176/android/"+db_img_path).into(imageView);
         }
 
         //link to other activity from the navigation drawer

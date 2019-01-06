@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tv_name, tv_age, tv_email, tv_address;
     Bitmap bitmap;
 
+    public String db_img_path = "";
     ProgressDialog progressDialog;
 
     @Override
@@ -58,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //get user profile from SharedPrefManager
         tv_name = findViewById(R.id.textViewName);
-        tv_name.setText(SharedPrefManager.getInstance(this).getKeyFName()+" "+SharedPrefManager.getInstance(this).getKeyLName());
+        tv_name.setText(SharedPrefManager.getInstance(this).getKeyFName() + " " + SharedPrefManager.getInstance(this).getKeyLName());
         tv_age = findViewById(R.id.textViewAge);
         tv_age.setText(SharedPrefManager.getInstance(this).getKeyAge());
         tv_email = findViewById(R.id.textViewEmail);
@@ -71,15 +77,11 @@ public class ProfileActivity extends AppCompatActivity {
         btnUpload = findViewById(R.id.btnUpload);
         imageView = findViewById(R.id.imageViewProfile);
 
-        String db_img_path = "";
-
         //check if profile image is in sharedPrefManager
-        if(SharedPrefManager.getInstance(this).getKeyImageInfo() != ""){
+        if (SharedPrefManager.getInstance(this).getKeyImageInfo() != "") {
             db_img_path = SharedPrefManager.getInstance(this).getKeyImageInfo();
+            Picasso.get().load("http://192.168.0.176/android/" + db_img_path).into(imageView);
         }
-
-        Picasso.get().load("http://192.168.0.176/android"+db_img_path).into(imageView);
-
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +105,8 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                         SharedPrefManager.getInstance(ProfileActivity.this).setKeyImageInfo(response);
+                        SharedPrefManager.getInstance(ProfileActivity.this).setKeyImageInfo(response);
+                        Picasso.get().invalidate("http://192.168.0.176/android" + db_img_path);
                         Toast.makeText(getApplicationContext(), "Image uploaded successfully.", Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -164,7 +167,6 @@ public class ProfileActivity extends AppCompatActivity {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
-
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
