@@ -76,8 +76,6 @@ public class ProfileActivity extends AppCompatActivity {
         //check if profile image is in sharedPrefManager
         if(SharedPrefManager.getInstance(this).getKeyImageInfo() != ""){
             db_img_path = SharedPrefManager.getInstance(this).getKeyImageInfo();
-        }else{
-
         }
 
         Picasso.get().load("http://192.168.0.176/android"+db_img_path).into(imageView);
@@ -105,6 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
+                         SharedPrefManager.getInstance(ProfileActivity.this).setKeyImageInfo(response);
                         Toast.makeText(getApplicationContext(), "Image uploaded successfully.", Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
@@ -168,5 +167,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAndRemoveTask();
     }
 }

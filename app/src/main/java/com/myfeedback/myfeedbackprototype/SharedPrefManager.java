@@ -99,4 +99,15 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_ADDRESS, "");
     }
+
+    public boolean setKeyImageInfo(String img_path){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_IMAGE_INFO, img_path);
+
+        editor.apply();
+
+        return true;
+    }
 }

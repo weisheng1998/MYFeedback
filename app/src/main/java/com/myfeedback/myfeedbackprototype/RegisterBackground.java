@@ -41,7 +41,7 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                 String email = params[4];
                 String IC = params[5];
                 String address = params[6];
-                String password = params[6];
+                String password = params[7];
                 //String deviceID = params[7];
 
                 URL url = new URL(register_url);
