@@ -8,40 +8,44 @@
     <string name="setting">Settings</string>
     <string name="aboutus">About Us</string>
     <string name="exit">Exit</string>
-    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
-    <string name="changeLanguage">Change Language</string>
     <string name="exitPrompt">Press again to exit</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
-    <string name="AchievementFragment" translatable="false">This is a achievement page</string>
-    <string name="ComplaintFragment" translatable="false">This is a complaint page</string>
-    <string name="NewsFragment" translatable="false">This is a news page</string>
     <string name="about1" translatable="false">My Feedback App\nv0.1.0 alpha</string>
     <string name="about2">Proudly developed by:</string>
     <string name="about3" translatable="false">Neoh Wei Sheng \n Tan Yie Hong \n Saw Fei Nie\n See Thou Zhendong\n Lok Yee Von</string>
     <string name="register">Register</string>
-    <string name="email" translatable="false">Email</string>
-    <string name="address" translatable="false">Address</string>
-    <string name="f_name" translatable="false">First Name</string>
-    <string name="l_name" translatable="false">Last Name</string>
-    <string name="password" translatable="false">Password</string>
-    <string name="age" translatable="false">Age</string>
-    <string name="ic" translatable="false">IC</string>
-    <string name="logout" translatable="false">Logout</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="f_name">First Name</string>
+    <string name="l_name">Last Name</string>
+    <string name="password">Password</string>
+    <string name="age">Age</string>
+    <string name="ic">IC</string>
+    <string name="logout">Logout</string>
     <string name="default_notification_channel_name" translatable="false" />
     <string name="default_notification_channel_id" translatable="false" />
     <string name="msg_token_fmt" translatable="false" />
-    <string name="title_activity_view_complaint" translatable="false">ViewComplaint</string>
-    <string name="title_activity_view_complain" translatable="false">View Complain</string>
-    <string name="nonMemberLogin_achievement" translatable="false">Login or register to view your achievement.</string>
-    <string name="nonMemberLogin_complaint" translatable="false">Login or register to view your complaint history.</string>
-    <string name="date_created" translatable="false">Date Created:</string>
-    <string name="category" translatable="false">Category :</string>
-    <string name="submit" translatable="false">Submit</string>
-    <string name="upload_image" translatable="false">Upload Image</string>
-    <string name="location_recorded" translatable="false">Your location will be recorded upon submission.</string>
-    <string name="complaints_made" translatable="false">Complaints made</string>
-
+    <string name="title_activity_view_complain">View Complaint</string>
+    <string name="nonMemberLogin_achievement">Login or register to view your achievement.</string>
+    <string name="nonMemberLogin_complaint">Login or register to view your complaint history.</string>
+    <string name="date_created">Date Created :</string>
+    <string name="category_">Category :</string>
+    <string name="category">Category</string>
+    <string name="submit">Submit</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="location_recorded">Your location will be recorded upon submission.</string>
+    <string name="complaints_made">Complaints made</string>
+    <string name="description">Description</string>
+    <string name="description_">Description :</string>
+    <string name="status_">Status :</string>
+    <string name="view">View</string>
+    <string name="id_">ID :</string>
+    <string name="community">Community</string>
+    <string name="nation">Nation</string>
+    <string name="communityUppercase">COMMUNITY</string>
+    <string name="nationUpperCase">NATION</string>
+    <string name="submission_error">Opps, looks like the internet is not doing its work. Would you please try again later?</string>
     <!-- New Complaint Requirement -->
     <string-array name="category">
         <item>Complaint</item>

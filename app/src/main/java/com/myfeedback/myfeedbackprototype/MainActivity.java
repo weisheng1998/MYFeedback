@@ -52,19 +52,81 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_LANG = "key_lang"; // preference key
     private Context context;
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigation
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.news:
+                    fm.beginTransaction()
+                            .hide(active)
+                            .show(fragmentN)
+                            .commit();
+                    active = fragmentN;
+                    return true;
+
+                case R.id.complaint:
+                    fm.beginTransaction()
+                            .hide(active)
+                            .detach(fragmentC)
+                            .attach(fragmentC)
+                            .show(fragmentC)
+                            .commit();
+                    active = fragmentC;
+                    return true;
+
+                case R.id.achievement:
+                    fm.beginTransaction()
+                            .hide(active)
+                            .show(fragmentA)
+                            .detach(fragmentA)
+                            .attach(fragmentA)
+                            .show(fragmentA)
+                            .commit();
+                    active = fragmentA;
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    private void launchAboutUs() {
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchRegister() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void launchProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //initialisation
         super.onCreate(savedInstanceState);
 
+
         // Google FireBase API
+        final SharedPreferences prefs = this.getSharedPreferences("com.myfeedback.myfeedbackprototype", Context.MODE_PRIVATE);
+
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String newToken = instanceIdResult.getToken();
                 Log.e("newToken",newToken);
-
+                prefs.edit().putString("deviceID",newToken).apply();
             }
         });
 
@@ -123,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            tv.setText("MYFeedback");
+            tv.setText(R.string.app_name);
         }
 
         //link to other activity from the navigation drawer
@@ -164,27 +226,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void launchAboutUs() {
-        Intent intent = new Intent(this, AboutUsActivity.class);
-        startActivity(intent);
-    }
-
-    private void launchRegister() {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    }
-
-    private void launchLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void launchProfile() {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
-
     //this code will run before the navigation drawer is initialised, so that we can programmatically configure the
     //visibility of the menu
     @Override
@@ -195,37 +236,15 @@ public class MainActivity extends AppCompatActivity {
             login_menu.findItem(R.id.login).setVisible(false);
             login_menu.findItem(R.id.register).setVisible(false);
             login_menu.findItem(R.id.logout).setVisible(true);
+            login_menu.findItem(R.id.profile).setVisible(true);
         } else {
             login_menu.findItem(R.id.login).setVisible(true);
             login_menu.findItem(R.id.register).setVisible(true);
             login_menu.findItem(R.id.logout).setVisible(false);
+            login_menu.findItem(R.id.profile).setVisible(false);
         }
         return true;
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mBottomNavigation
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.news:
-                    fm.beginTransaction().hide(active).show(fragmentN).commit();
-                    active = fragmentN;
-                    return true;
-
-                case R.id.complaint:
-                    fm.beginTransaction().hide(active).show(fragmentC).commit();
-                    active = fragmentC;
-                    return true;
-
-                case R.id.achievement:
-                    fm.beginTransaction().hide(active).show(fragmentA).commit();
-                    active = fragmentA;
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -20,11 +20,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class RegisterBackground extends AsyncTask<String,Void,String> {
-    public String type_g = "";
-    AlertDialog alertDialog;
-    public String p_username;
     ProgressDialog loadingDialog;
     public Context context;
+    AlertDialog alertDialog;
 
     public RegisterBackground(Context ctx) {
         this.context = ctx;
@@ -33,13 +31,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String register_url = "https://developer.tprocenter.net/android/register.php";
+        String register_url = "https://developer.tprocenter.net/android/register.php?toekn=" + params[8];
 
-        p_username = params[1];
-
-        type_g = type;
-
-        if(type.equals("register")){
+        if (type.equals("register")) {
             try {
                 String fname = params[1];
                 String lname = params[2];
@@ -47,8 +41,7 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                 String email = params[4];
                 String IC = params[5];
                 String address = params[6];
-                String password = params[6];
-                String deviceID = params[7];
+                String password = params[7];
 
                 URL url = new URL(register_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -57,14 +50,15 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("f_name","UTF-8")+"="+URLEncoder.encode(fname,"UTF-8")+"&"
+                String post_data =
+                        URLEncoder.encode("f_name","UTF-8")+"="+URLEncoder.encode(fname,"UTF-8")+"&"
                         + URLEncoder.encode("l_name","UTF-8")+"="+URLEncoder.encode(lname,"UTF-8")+"&"
                         + URLEncoder.encode("age","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
                         + URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"
                         + URLEncoder.encode("ic","UTF-8")+"="+URLEncoder.encode(IC,"UTF-8")+"&"
                         + URLEncoder.encode("address","UTF-8")+"="+URLEncoder.encode(address,"UTF-8")+"&"
-                        + URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8")
-                        + URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(deviceID,"UTF-8");
+                        + URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                        //+ URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(deviceID,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -85,8 +79,6 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else { //logout
-
         }
         return null;
     }
@@ -100,12 +92,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         loadingDialog.dismiss();
         if (result.contentEquals("register_success")) {
-
-            //loadingDialog = ProgressDialog.show(context, "", "Registration success.", true);
-
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Registration Success")
-                    .setMessage("Thank You for been part of family.")
+                    .setMessage("Thank You for being part of the family.")
                     .setCancelable(false)
                     .setNegativeButton("Close",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -118,10 +107,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
             alert.show();
         }
         else {
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setMessage("Sorry. Something went wrong on our side. Please try again later.");
-            alertDialog.setTitle("Register failed.");
-            alertDialog.show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Register failed.").setMessage("Sorry. Something went wrong on our side. Please try again later.");
+            builder.show();
         }
     }
 
