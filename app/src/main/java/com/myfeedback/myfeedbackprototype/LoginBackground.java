@@ -31,10 +31,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class LoginBackground extends AsyncTask<String, Void, String> {
-    public String p_username;
+    public String p_username, p_deviceid;
     ProgressDialog loadingDialog;
     public Context context;
-    String sharedpref_url = "http://192.168.0.176/android/loginQuery.php?user_email=";
+    String sharedpref_url = "https://developer.tprocenter.net/android/loginQuery.php?user_email=";
 
     public LoginBackground(Context ctx) {
         this.context = ctx;
@@ -42,7 +42,7 @@ public class LoginBackground extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String login_url = "https://developer.tprocenter.net/android/login.php";
+        String login_url = "https://developer.tprocenter.net/android/login.php?token=" + params[3];
         String type = params[0];
         p_username = params[1];
 
@@ -50,6 +50,7 @@ public class LoginBackground extends AsyncTask<String, Void, String> {
             try {
                 String user_name = params[1];
                 String password = params[2];
+                String id = params[3];
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");

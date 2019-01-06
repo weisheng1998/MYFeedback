@@ -2,6 +2,7 @@ package com.myfeedback.myfeedbackprototype;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -33,7 +34,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText fname, lname, email, pass, age, IC, address;
-    String str_fname, str_lname, str_email, str_pass, str_age, str_IC, str_Address, type, deviceID;
+    String str_fname, str_lname, str_email, str_pass, str_age, str_IC, str_Address, type, deviceid;
     boolean valid = false;
     private ConstraintLayout constraintLayout;
     public Context context;
@@ -188,7 +189,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     public void OnRegister(View view) {
         if (!valid) {
             Toast.makeText(RegisterActivity.this, "Invalid input. Please try again.",
@@ -203,18 +203,11 @@ public class RegisterActivity extends AppCompatActivity {
             str_Address = String.valueOf(address.getText()).trim();
             type = "register";
 
-            // Google FireBase API - Cloud Messaging
-            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(RegisterActivity.this, new OnSuccessListener<InstanceIdResult>() {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    deviceID = instanceIdResult.getToken();
-                    String newToken = deviceID;
-                    Log.e("newToken", newToken);
-                }
-            });
+            SharedPreferences prefs = this.getSharedPreferences("com.myfeedback.myfeedbackprototype", Context.MODE_PRIVATE);
+            deviceid = prefs.getString("deviceID", null);
 
             RegisterBackground registerBackground = new RegisterBackground(this);
-            registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass);
+            registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass, deviceid);
 
 
 //            registerBackground.execute(type, str_fname, str_lname, str_age, str_email, str_IC, str_Address, str_pass, deviceID);
@@ -258,95 +251,95 @@ public class RegisterActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
-    protected String checkDuplicateAccount() {
-        // Google FireBase API - Cloud Messaging
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(RegisterActivity.this, new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                deviceID = instanceIdResult.getToken();
-                String newToken = deviceID;
-                Log.e("newToken", newToken);
-            }
-        });
-
-        String check_id = "https://developer.tprocenter.net/android/checkid.php";
-
-        try {
-            URL url = new URL(check_id);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setDoInput(true);
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("deviceID", "UTF-8") + "=" + URLEncoder.encode(deviceID, "UTF-8");
-            bufferedWriter.write(post_data);
-            bufferedWriter.flush();
-            bufferedWriter.close();
-            outputStream.close();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-            String result = "";
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                result += line;
-            }
-            bufferedReader.close();
-            inputStream.close();
-            httpURLConnection.disconnect();
-
-            return result;
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "fail";
-    }
-
-    protected String checkEmailAvailability(String email) {
-        String check_id = "https://developer.tprocenter.net/android/checkemail.php";
-
-        try {
-            URL url = new URL(check_id);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setDoInput(true);
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-
-            // Mode 0 - Normal Checking
-            // Mode 1 - Device ID Spot Check
-            // Mode 2 - Update Device ID
-
-            String post_data = URLEncoder.encode("mode","UTF-8")+"="+URLEncoder.encode("1","UTF-8")+"&"
-                    + URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(deviceID,"UTF-8");
-
-            bufferedWriter.write(post_data);
-            bufferedWriter.flush();
-            bufferedWriter.close();
-            outputStream.close();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-            String result = "";
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                result += line;
-            }
-            bufferedReader.close();
-            inputStream.close();
-            httpURLConnection.disconnect();
-
-            return result;
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "fail";
-    }
+//    protected String checkDuplicateAccount() {
+//        // Google FireBase API - Cloud Messaging
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(RegisterActivity.this, new OnSuccessListener<InstanceIdResult>() {
+//            @Override
+//            public void onSuccess(InstanceIdResult instanceIdResult) {
+//                deviceID = instanceIdResult.getToken();
+//                String newToken = deviceID;
+//                Log.e("newToken", newToken);
+//            }
+//        });
+//
+//        String check_id = "https://developer.tprocenter.net/android/checkid.php";
+//
+//        try {
+//            URL url = new URL(check_id);
+//            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//            httpURLConnection.setRequestMethod("POST");
+//            httpURLConnection.setDoOutput(true);
+//            httpURLConnection.setDoInput(true);
+//            OutputStream outputStream = httpURLConnection.getOutputStream();
+//            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+//            String post_data = URLEncoder.encode("deviceID", "UTF-8") + "=" + URLEncoder.encode(deviceID, "UTF-8");
+//            bufferedWriter.write(post_data);
+//            bufferedWriter.flush();
+//            bufferedWriter.close();
+//            outputStream.close();
+//            InputStream inputStream = httpURLConnection.getInputStream();
+//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+//            String result = "";
+//            String line;
+//            while ((line = bufferedReader.readLine()) != null) {
+//                result += line;
+//            }
+//            bufferedReader.close();
+//            inputStream.close();
+//            httpURLConnection.disconnect();
+//
+//            return result;
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return "fail";
+//    }
+//
+//    protected String checkEmailAvailability(String email) {
+//        String check_id = "https://developer.tprocenter.net/android/checkemail.php";
+//
+//        try {
+//            URL url = new URL(check_id);
+//            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//            httpURLConnection.setRequestMethod("POST");
+//            httpURLConnection.setDoOutput(true);
+//            httpURLConnection.setDoInput(true);
+//            OutputStream outputStream = httpURLConnection.getOutputStream();
+//            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+//
+//            // Mode 0 - Normal Checking
+//            // Mode 1 - Device ID Spot Check
+//            // Mode 2 - Update Device ID
+//
+//            String post_data = URLEncoder.encode("mode","UTF-8")+"="+URLEncoder.encode("1","UTF-8")+"&"
+//                    + URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(deviceID,"UTF-8");
+//
+//            bufferedWriter.write(post_data);
+//            bufferedWriter.flush();
+//            bufferedWriter.close();
+//            outputStream.close();
+//            InputStream inputStream = httpURLConnection.getInputStream();
+//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+//            String result = "";
+//            String line;
+//            while ((line = bufferedReader.readLine()) != null) {
+//                result += line;
+//            }
+//            bufferedReader.close();
+//            inputStream.close();
+//            httpURLConnection.disconnect();
+//
+//            return result;
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return "fail";
+//    }
 }
 

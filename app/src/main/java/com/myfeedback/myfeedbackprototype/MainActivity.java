@@ -117,13 +117,16 @@ public class MainActivity extends AppCompatActivity {
         //initialisation
         super.onCreate(savedInstanceState);
 
+
         // Google FireBase API
+        final SharedPreferences prefs = this.getSharedPreferences("com.myfeedback.myfeedbackprototype", Context.MODE_PRIVATE);
+
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String newToken = instanceIdResult.getToken();
                 Log.e("newToken",newToken);
-
+                prefs.edit().putString("deviceID",newToken).apply();
             }
         });
 

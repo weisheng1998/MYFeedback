@@ -31,7 +31,7 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String register_url = "https://developer.tprocenter.net/android/register.php";
+        String register_url = "https://developer.tprocenter.net/android/register.php?toekn=" + params[8];
 
         if (type.equals("register")) {
             try {
@@ -41,8 +41,7 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                 String email = params[4];
                 String IC = params[5];
                 String address = params[6];
-                String password = params[6];
-                //String deviceID = params[7];
+                String password = params[7];
 
                 URL url = new URL(register_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
