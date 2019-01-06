@@ -46,7 +46,6 @@
     <string name="communityUppercase">COMMUNITY</string>
     <string name="nationUpperCase">NATION</string>
     <string name="submission_error">Opps, looks like the internet is not doing its work. Would you please try again later?</string>
-
     <!-- New Complaint Requirement -->
     <string-array name="category">
         <item>Complaint</item>
