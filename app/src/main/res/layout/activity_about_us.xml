@@ -8,7 +8,7 @@
     tools:context=".AboutUsActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewProfile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="backMessage"
@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.435" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewAge"
         android:layout_width="0dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"

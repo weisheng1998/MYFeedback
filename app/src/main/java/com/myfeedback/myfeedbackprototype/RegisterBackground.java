@@ -22,6 +22,7 @@ import java.net.URLEncoder;
 public class RegisterBackground extends AsyncTask<String,Void,String> {
     ProgressDialog loadingDialog;
     public Context context;
+    AlertDialog alertDialog;
 
     public RegisterBackground(Context ctx) {
         this.context = ctx;

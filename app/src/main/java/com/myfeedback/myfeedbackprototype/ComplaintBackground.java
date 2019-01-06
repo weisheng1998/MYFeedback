@@ -55,6 +55,7 @@ public class ComplaintBackground extends AsyncTask<String, Void, String> {
             String gps = params[6];
             String useremail = params[7];
             String datesubmit = formattedDate;
+
             URL url = new URL(new_complaint_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");

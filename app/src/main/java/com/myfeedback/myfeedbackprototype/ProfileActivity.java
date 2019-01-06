@@ -37,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btnedit, btnUpload;
     ImageView imageView;
     Bitmap bitmap;
-    String urlUpload = "";
+    String urlUpload = "http://192.168.0.176/android/upload.php";
     ProgressDialog progressDialog;
 
     @Override
@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         btnedit = findViewById(R.id.btnedit);
         btnUpload = findViewById(R.id.btnUpload);
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageViewProfile);
 
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override

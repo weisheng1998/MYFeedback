@@ -9,47 +9,47 @@
     tools:context=".ProfileActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewProfile"
         android:layout_width="301dp"
         android:layout_height="179dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:src="@drawable/nopic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="queenie"
+        android:text="Queenie"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Tokyo, Japan"
+        android:text="12"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textViewName" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutVertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -59,71 +59,65 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2">
+        app:layout_constraintTop_toBottomOf="@id/textViewAge">
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizontalOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imageViewEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/chickon" />
 
             <LinearLayout
+                android:id="@+id/linearLayoutVerticalOne"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textViewEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="halo"
+                    android:text="queeniesaw@gmail.com"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2012"
-                    android:textColor="#443A81"
-                    android:textSize="14sp" />
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizontalTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imageViewAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/crediton" />
 
             <LinearLayout
+                android:id="@+id/linearLayourVerticalTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textViewAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Money Saver"
+                    android:text="75, Jalan KLCC, Selangor."
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2012"
-                    android:textColor="#443A81"
-                    android:textSize="14sp" />
 
             </LinearLayout>
         </LinearLayout>
