@@ -40,7 +40,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                 String email = params[4];
                 String IC = params[5];
                 String address = params[6];
-                String password = params[7];
+                String password = params[6];
+                //String deviceID = params[7];
+
                 URL url = new URL(register_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -48,13 +50,15 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("f_name","UTF-8")+"="+URLEncoder.encode(fname,"UTF-8")+"&"
+                String post_data =
+                        URLEncoder.encode("f_name","UTF-8")+"="+URLEncoder.encode(fname,"UTF-8")+"&"
                         + URLEncoder.encode("l_name","UTF-8")+"="+URLEncoder.encode(lname,"UTF-8")+"&"
                         + URLEncoder.encode("age","UTF-8")+"="+URLEncoder.encode(age,"UTF-8")+"&"
                         + URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"
                         + URLEncoder.encode("ic","UTF-8")+"="+URLEncoder.encode(IC,"UTF-8")+"&"
                         + URLEncoder.encode("address","UTF-8")+"="+URLEncoder.encode(address,"UTF-8")+"&"
-                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                        + URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                        //+ URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(deviceID,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -101,6 +105,12 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                     });
             AlertDialog alert = builder.create();
             alert.show();
+        }
+        else {
+            alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setMessage("Sorry. Something went wrong on our side. Please try again later.");
+            alertDialog.setTitle("Register failed.");
+            alertDialog.show();
         }
     }
 
