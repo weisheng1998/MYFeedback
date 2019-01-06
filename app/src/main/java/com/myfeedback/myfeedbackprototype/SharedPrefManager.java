@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "mysharedpref12";
+    private static final String KEY_UID = "userid";
     private static final String KEY_F_NAME = "userfname";
     private static final String KEY_L_NAME = "userlname";
     private static final String KEY_USER_EMAIL = "useremail";
     private static SharedPrefManager mInstance;
     private static Context mCtx;
-
 
     private SharedPrefManager(Context context) {
         mCtx = context;
