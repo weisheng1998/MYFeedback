@@ -1,6 +1,8 @@
 package com.myfeedback.myfeedbackprototype;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -124,9 +126,12 @@ public class LoginActivity extends AppCompatActivity {
             EditText pass = findViewById(R.id.password_et);
             String password = String.valueOf(pass.getText()).trim();
 
+            SharedPreferences prefs = this.getSharedPreferences("com.myfeedback.myfeedbackprototype", Context.MODE_PRIVATE);
+            deviceID = prefs.getString("deviceID", null);
+
             String type = "login";
             LoginBackground loginBackground = new LoginBackground(this);
-            loginBackground.execute(type, email, password);
+            loginBackground.execute(type, email, password, deviceID);
 
         }
     }
