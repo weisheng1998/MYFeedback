@@ -52,9 +52,9 @@ public class RSSFeedActivity extends ListActivity {
         tb = findViewById(R.id.toolbarNews);
         TextView tv = tb.findViewById(R.id.TextViewNews);
         if (rss_link.contains("nation")) {
-            tv.setText("Nation");
+            tv.setText(R.string.nation);
         } else if (rss_link.contains("community")) {
-            tv.setText("Community");
+            tv.setText(R.string.community);
         }
         new LoadRSSFeedItems().execute(rss_link);
 

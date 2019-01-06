@@ -20,9 +20,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class RegisterBackground extends AsyncTask<String,Void,String> {
-    public String type_g = "";
-    AlertDialog alertDialog;
-    public String p_username;
     ProgressDialog loadingDialog;
     public Context context;
 
@@ -33,47 +30,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "https://developer.tprocenter.net/android/login.php";
         String register_url = "https://developer.tprocenter.net/android/register.php";
 
-        p_username = params[1];
-
-        type_g = type;
-
-        if(type.equals("login")) {
-            try {
-                String user_name = params[1];
-                String password = params[2];
-                URL url = new URL(login_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("user_name","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
-                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
-                bufferedWriter.write(post_data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
-                String result="";
-                String line;
-                while((line = bufferedReader.readLine())!= null) {
-                    result += line;
-                }
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-                return result;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else if(type.equals("register")){
+        if (type.equals("register")) {
             try {
                 String fname = params[1];
                 String lname = params[2];
@@ -116,8 +75,6 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else { //logout
-
         }
         return null;
     }
@@ -131,12 +88,9 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         loadingDialog.dismiss();
         if (result.contentEquals("register_success")) {
-
-            //loadingDialog = ProgressDialog.show(context, "", "Registration success.", true);
-
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Registration Success")
-                    .setMessage("Thank You for been part of family.")
+                    .setMessage("Thank You for being part of the family.")
                     .setCancelable(false)
                     .setNegativeButton("Close",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -147,13 +101,6 @@ public class RegisterBackground extends AsyncTask<String,Void,String> {
                     });
             AlertDialog alert = builder.create();
             alert.show();
-
-
-        } else {
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setMessage(result);
-            alertDialog.setTitle("Login failed.");
-            alertDialog.show();
         }
     }
 

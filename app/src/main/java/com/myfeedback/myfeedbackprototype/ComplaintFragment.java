@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ComplaintFragment extends Fragment {
 
-    private static final String url = "http://192.168.1.104/phpQuery/complaintQuery.php?user_email=";
+    private static final String url = "http://192.168.0.176/android/complaintQuery.php?user_email=";
 
     List<ComplaintList> complaintList;
     RecyclerView recyclerView;

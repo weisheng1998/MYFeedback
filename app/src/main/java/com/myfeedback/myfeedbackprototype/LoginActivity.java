@@ -107,9 +107,8 @@ public class LoginActivity extends AppCompatActivity {
             EditText pass = findViewById(R.id.password_et);
             String password = String.valueOf(pass.getText()).trim();
 
-            String type = "login";
             LoginBackground loginBackground = new LoginBackground(this);
-            loginBackground.execute(type, email, password);
+            loginBackground.execute("login", email, password);
 
         }
     }

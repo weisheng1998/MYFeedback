@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 public class AchievementFragment extends Fragment {
 
-    private static final String url = "http://192.168.1.104/phpQuery/achievementCount.php?user_email=";
+    private static final String url = "http://192.168.0.176/android/achievementCount.php?user_email=";
 
     TextView tv_totalComplaintCount, tv_message, tv_notify;
     ConstraintLayout cl;
@@ -71,9 +71,9 @@ public class AchievementFragment extends Fragment {
                                     message = "No complaint made. Consider adding one?";
                                 } else if (calcCount == 1) {
                                     message = "A first big step from you. Keep it up!";
-                                } else if (calcCount > 2 && calcCount <= 10) {
+                                } else if (calcCount >= 2 && calcCount < 10) {
                                     message = "Keep it going!";
-                                } else if (calcCount > 10 && calcCount < 50) {
+                                } else if (calcCount >= 10 && calcCount < 50) {
                                     message = "Incredible work! You are our nation's hero!";
                                 } else if (calcCount >= 50 && calcCount < 100) {
                                     message = "Just unbelievable...";

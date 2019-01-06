@@ -62,7 +62,7 @@
         <activity
             android:name=".ViewComplain"
             android:label="@string/title_activity_view_complain"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
